@@ -1,5 +1,6 @@
 import React from 'react';
 import MetroTransitConsumer from './api/MetroTransitConsumer.js'
+import MetroTransitBusDirections from './MetroTransitBusDirections.js';
 
 class MetroTransitBusRoutes extends React.Component {
     constructor(props){
@@ -13,6 +14,7 @@ class MetroTransitBusRoutes extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.getListOfRoutes = this.getListOfRoutes.bind(this)
         this.setCurrentRouteNumber = this.setCurrentRouteNumber.bind(this)
+        this.DisplayBusDirections = this.DisplayBusDirections.bind(this)
     }
 
     async componentDidMount(){
@@ -26,7 +28,9 @@ class MetroTransitBusRoutes extends React.Component {
     }
 
     getListOfRoutes(){
+        // Save All Bus Routes
         var allRoutes = []
+
         // Create Default Route
         var defaultOption = <option value={'Select route'}>Select route</option>
         allRoutes.push(defaultOption)
@@ -53,6 +57,15 @@ class MetroTransitBusRoutes extends React.Component {
         }
     }
 
+    DisplayBusDirections(){
+        if(this.state.selectedRouteID !== null && this.state.selectedRoute!=='Select route'){
+            return <MetroTransitBusDirections route_number={this.state.selectedRouteID} key={this.state.selectedRouteID}/>
+        }
+        else{
+            return null
+        }
+    }
+
 
     render(){
         return (
@@ -60,7 +73,9 @@ class MetroTransitBusRoutes extends React.Component {
                 <select value={this.state.selectedRoute} onChange={this.handleChange}>
                     <this.getListOfRoutes/>
                 </select>
-                <button onClick={() => {console.log(this.state.selectedRouteID)}}>Get Current Route!</button>
+                <br></br>
+                <br></br>
+                <this.DisplayBusDirections/>
             </div>
         );
     }

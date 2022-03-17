@@ -30,6 +30,16 @@ class MetroTransitConsumer{
             console.log(err)
         }
     }
+
+    async getDepartTimes(route_id, direction, stop){
+        try{
+            var departures = await axios.get('https://svc.metrotransit.org/NexTrip/' + route_id + '/' + direction + '/' + stop)
+            return departures.data
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
 }
 
 

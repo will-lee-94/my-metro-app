@@ -32,14 +32,15 @@ class MetroTransitBusRoutes extends React.Component {
         var allRoutes = []
 
         // Create Default Route
-        var defaultOption = <option value={'Select route'}>Select route</option>
+        var defaultOption = <option key={'Select route'} value={'Select route'}>Select route</option>
         allRoutes.push(defaultOption)
 
         // Create Dynamic Bus Routes with map function
         if(this.state.busRoutes !== null){
             var routeOptions = this.state.busRoutes.map(function(route){
+                var routeKey = "route-" + route['Description']
                 return (
-                    <option value={route['Description']}>
+                    <option key={routeKey} value={route['Description']}>
                         {route['Description']}
                     </option>
                 )
@@ -70,6 +71,7 @@ class MetroTransitBusRoutes extends React.Component {
     render(){
         return (
             <div>
+                <h1>Bus Routes</h1>
                 <select value={this.state.selectedRoute} onChange={this.handleChange}>
                     <this.getListOfRoutes/>
                 </select>

@@ -6,7 +6,6 @@ class MetroTransitContent extends React.Component {
   render(){
     return (
       <div>
-        Bus Routes!
         <MetroTransitBusRoutes/>
       </div>
     );
